@@ -435,6 +435,62 @@ main .model {
   cursor: pointer;
 }
 
+footer {
+  margin-top: 100px;
+	background-color:#222222;
+    padding: 60px 0px;
+}
+
+footer ul {
+    list-style:none;
+    margin:0 auto;
+    display:inline-block;
+    padding-top:50px;
+}
+
+footer ul li {
+    float:left;
+}
+
+footer ul li a {
+	color:#b1aca1;
+    padding:20px;
+}
+
+footer ul li a:hover {
+	color:#7dabdb;
+	text-decoration:none;
+}
+
+.footer-top {
+	padding-bottom: 50px;
+}
+
+.footer-top .fa {
+    font-size: 18px;
+    color: #FFF;
+    padding-right: 10px;
+}
+
+.footer-top a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.footer-top .col-lg-2:hover .fa,
+.footer-top .col-lg-2:hover a{
+    color: #7dabdb;
+}
+
+.copyright {
+    background-color: #f0f0f0;
+}
+
+.copyright p {
+	font-size: 12px;
+	padding: 15px 0 10px 0;
+}
+
 
 @media (max-width:415px) {
   header {
@@ -574,7 +630,7 @@ main .model {
 .cart {
   margin-top: 15px;
   width: 100vh;
-  height: 120vh;
+  height: 128vh;
   background-color: #fff;
   z-index: 1;
 }
@@ -619,5 +675,13 @@ main .model {
 
 .item-info.h4{
   font-size: 12px;
+}
+footer {
+  margin-top: 45vh;
+}
+.container {
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
 }
 }

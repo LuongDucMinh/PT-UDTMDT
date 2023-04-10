@@ -55,7 +55,7 @@ updateCart();
 
 // ADD TO CART
 function addToCart(id) {
-  console.log(id)
+
   // check if prodcut already exist in cart
   if (cart.some((item) => item.id === id)) {
     changeNumberOfUnits("plus", id);
@@ -137,10 +137,12 @@ function changeNumberOfUnits(action, id) {
       }
     }
 
+
     return {
       ...item,
       numberOfUnits,
     };
+   
   });
 
   updateCart();
