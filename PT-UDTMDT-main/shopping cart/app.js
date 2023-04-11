@@ -1,25 +1,22 @@
 // SELECT ELEMENTS
-const productsEl = document.querySelector(".products");
-const cartItemsEl = document.querySelector(".cart-items");
-const subtotalEl = document.querySelector(".subtotal");
-const totalItemsInCartEl = document.querySelector(".total-items-in-cart");
-const openShopping = document.querySelector(".shopping-bag");
-const addCart = document.querySelector(".cart");
-const closeShopping = document.querySelector(".closeShopping");
+const productsEl = document.querySelector('.products')
+const cartItemsEl = document.querySelector('.cart-items')
+const subtotalEl = document.querySelector('.subtotal')
+const totalItemsInCartEl = document.querySelector('.total-items-in-cart')
+const openShopping = document.querySelector('.shopping-bag')
+const addCart = document.querySelector('.cart')
+const closeShopping = document.querySelector('.closeShopping')
 
-
-openShopping.addEventListener('click', function (e){
-  e.preventDefault();
+openShopping.addEventListener('click', function (e) {
+  e.preventDefault()
   addCart.classList.add('active')
 })
 
-closeShopping.addEventListener('click',function (e){
-  e.preventDefault();
+closeShopping.addEventListener('click', function (e) {
+  e.preventDefault()
   addCart.classList.remove('active')
 })
 // RENDER PRODUCTS
-
-
 
 function renderProdcuts() {
   products.forEach((product) => {
@@ -29,9 +26,11 @@ function renderProdcuts() {
                     <div class="item-img">
                         <img src="${product.imgSrc}" alt="${product.name}">
                     </div>
-                    <div class="desc">
-                        <h2>${product.name}</h2>
-                        <h2><small>$</small>${product.price}</h2>
+                    <div class="desc ">
+                    
+                    <h2>${product.name}</h2>
+                    <h2><small>$</small>${product.price}</h2>
+                   
                         <p>
                             ${product.description}
                         </p>
@@ -44,59 +43,60 @@ function renderProdcuts() {
                     </div>
                 </div>
             </div>
-        `;
-  });
+        `
+  })
 }
-renderProdcuts();
+renderProdcuts()
 
 // cart array
-let cart = JSON.parse(localStorage.getItem("CART")) || [];
-updateCart();
+let cart = JSON.parse(localStorage.getItem('CART')) || []
+updateCart()
 
 // ADD TO CART
 function addToCart(id) {
-
   // check if prodcut already exist in cart
   if (cart.some((item) => item.id === id)) {
-    changeNumberOfUnits("plus", id);
+    changeNumberOfUnits('plus', id)
   } else {
-    const item = products.find((product) => product.id === id);
+    const item = products.find((product) => product.id === id)
 
     cart.push({
       ...item,
       numberOfUnits: 1,
-    });
+    })
   }
 
-  updateCart();
+  updateCart()
 }
 
 // update cart
 function updateCart() {
-  renderCartItems();
-  renderSubtotal();
+  renderCartItems()
+  renderSubtotal()
 
   // save cart to local storage
-  localStorage.setItem("CART", JSON.stringify(cart));
+  localStorage.setItem('CART', JSON.stringify(cart))
 }
 
 // calculate and render subtotal
 function renderSubtotal() {
   let totalPrice = 0,
-    totalItems = 0;
+    totalItems = 0
 
   cart.forEach((item) => {
-    totalPrice += item.price * item.numberOfUnits;
-    totalItems += item.numberOfUnits;
-  });
+    totalPrice += item.price * item.numberOfUnits
+    totalItems += item.numberOfUnits
+  })
 
-  subtotalEl.innerHTML = `Subtotal (${totalItems} items): $${totalPrice.toFixed(2)}`;
-  totalItemsInCartEl.innerHTML = totalItems;
+  subtotalEl.innerHTML = `Subtotal (${totalItems} items): $${totalPrice.toFixed(
+    2,
+  )}`
+  totalItemsInCartEl.innerHTML = totalItems
 }
 
 // render cart items
 function renderCartItems() {
-  cartItemsEl.innerHTML = ""; // clear cart element
+  cartItemsEl.innerHTML = '' // clear cart element
   cart.forEach((item) => {
     cartItemsEl.innerHTML += `
         <div class="cart-item">
@@ -113,38 +113,35 @@ function renderCartItems() {
                 <div class="btn plus" onclick="changeNumberOfUnits('plus', ${item.id})">+</div>           
             </div>
         </div>
-      `;
-  });
+      `
+  })
 }
 
 // remove item from cart
 function removeItemFromCart(id) {
-  cart = cart.filter((item) => item.id !== id);
+  cart = cart.filter((item) => item.id !== id)
 
-  updateCart();
+  updateCart()
 }
 
 // change number of units for an item
 function changeNumberOfUnits(action, id) {
   cart = cart.map((item) => {
-    let numberOfUnits = item.numberOfUnits;
+    let numberOfUnits = item.numberOfUnits
 
     if (item.id === id) {
-      if (action === "minus" && numberOfUnits > 1) {
-        numberOfUnits--;
-      } else if (action === "plus" && numberOfUnits < item.instock) {
-        numberOfUnits++;
+      if (action === 'minus' && numberOfUnits > 1) {
+        numberOfUnits--
+      } else if (action === 'plus' && numberOfUnits < item.instock) {
+        numberOfUnits++
       }
     }
-
 
     return {
       ...item,
       numberOfUnits,
-    };
-   
-  });
+    }
+  })
 
-  updateCart();
+  updateCart()
 }
-
